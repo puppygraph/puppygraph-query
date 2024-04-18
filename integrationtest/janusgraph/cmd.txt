@@ -1,0 +1,2 @@
+docker compose up -v
+docker exec -it janusgraph ./bin/gremlin.sh

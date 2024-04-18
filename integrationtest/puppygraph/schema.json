@@ -1,0 +1,100 @@
+{
+  "catalogs": [
+    {
+      "name": "duckdb_data",
+      "type": "duckdb",
+      "jdbc": {
+        "jdbcUri": "jdbc:duckdb:/home/ubuntu/test.db",
+        "driverClass": "org.duckdb.DuckDBDriver"
+      }
+    }
+  ],
+  "vertices": [
+    {
+      "label": "person",
+      "mappedTableSource": {
+        "catalog": "duckdb_data",
+        "schema": "modern",
+        "table": "person",
+        "metaFields": {
+          "id": "id"
+        }
+      },
+      "attributes": [
+        {
+          "type": "Int",
+          "name": "age"
+        },
+        {
+          "type": "String",
+          "name": "name"
+        }
+      ]
+    },
+    {
+      "label": "software",
+      "mappedTableSource": {
+        "catalog": "duckdb_data",
+        "schema": "modern",
+        "table": "software",
+        "metaFields": {
+          "id": "id"
+        }
+      },
+      "attributes": [
+        {
+          "type": "String",
+          "name": "lang"
+        },
+        {
+          "type": "String",
+          "name": "name"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "label": "knows",
+      "mappedTableSource": {
+        "catalog": "duckdb_data",
+        "schema": "modern",
+        "table": "knows",
+        "metaFields": {
+          "id": "id",
+          "from": "from_id",
+          "to": "to_id"
+        }
+      },
+      "from": "person",
+      "to": "person",
+      "attributes": [
+        {
+          "type": "Double",
+          "name": "weight"
+        }
+      ]
+    },
+    {
+      "label": "created",
+      "mappedTableSource": {
+        "catalog": "duckdb_data",
+        "schema": "modern",
+        "table": "created",
+        "metaFields": {
+          "id": "id",
+          "from": "from_id",
+          "to": "to_id"
+        }
+      },
+      "from": "person",
+      "to": "software",
+      "attributes": [
+        {
+          "type": "Double",
+          "name": "weight"
+        }
+      ]
+    }
+  ]
+}

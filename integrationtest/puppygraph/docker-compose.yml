@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  puppygraph-query:
+    image: puppygraph/puppygraph-query:latest
+    container_name: puppygraph-query
+    environment:
+      - PUPPYGRAPH_USERNAME=puppygraph
+      - PUPPYGRAPH_PASSWORD=puppygraph123
+      - PORT=8081
+      - GREMLINSERVER_HOST=puppygraph:8182
+    networks:
+      gremlin_net:
+    ports:
+      - "8081:8081"
+  puppygraph:
+    image: puppygraph/puppygraph:stable
+    container_name: puppygraph
+    networks:
+      gremlin_net:
+    ports:
+      - "8182:8182"
+    volumes:
+      - ./schema.json:/home/ubuntu/schema.json
+networks:
+  gremlin_net:
+    name: puppy-puppygraph
