@@ -3,6 +3,7 @@ import { AuthContext } from "../AuthContext";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import PGLogo from "../images/logo.png"
+import { Button, TextField } from "@mui/material";
 
 function Login() {
   const [errorMessage, setErrorMessage] = useState('');
@@ -22,7 +23,7 @@ function Login() {
   }
 
   return (
-    <div className="flex-1 lg:pl-72 pt-10">
+    <div className="flex-1 pt-10">
       <main className="">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -40,41 +41,13 @@ function Login() {
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
               <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-left text-sm font-medium leading-6 text-gray-900" // Added text-left
-                  >
-                    Username
-                  </label>
                   <div className="mt-2">
-                    <input
-                      id="username"
-                      name="username"
-                      required
-                      {...register("username")}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                    />
+                    <TextField id="username" name="username" label="Username" variant="outlined" className="w-full" required {...register("username")} />
                   </div>
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-left text-sm font-medium leading-6 text-gray-900" // Added text-left
-                  >
-                    Password
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="current-password"
-                      required
-                      {...register("password")}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
+                  <TextField type="password" id="password" name="password" autoComplete="current-password" label="Password" variant="outlined" className="w-full" required {...register("password")} />
                   <div className="text-sm text-right">
                     <Link
                       to="https://docs.puppygraph.com/user-manual/getting-started#set-username-and-password"
@@ -92,12 +65,9 @@ function Login() {
                 </div>
 
                 <div>
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md bg-puppy-purple px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-puppy-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                  >
+                  <Button type="submit" variant="contained" className="w-full">
                     Sign in
-                  </button>
+                  </Button>
                 </div>
               </form>
             </div>

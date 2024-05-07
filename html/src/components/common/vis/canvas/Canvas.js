@@ -83,6 +83,74 @@ const Canvas = ({
   );
 
   useEffect(() => {
+    const filterNotFound = (n) => {
+      if (!n) {
+        return null;
+      }
+      let found = false;
+      for (const node of nodes) {
+        if (node === n) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        for (const node of newNodes) {
+          if (node === n) {
+            found = true;
+            break;
+          }
+        }
+      }
+      if (found) {
+        return n;
+      } else {
+        return null;
+      }
+    }
+    setClickNode((node) => {
+      return filterNotFound(node);
+    });
+    setFocusNode((focus) => {
+      return filterNotFound(focus);
+    });
+  }, [nodes, newNodes]);
+
+  useEffect(() => {
+    const filterNotFound = (l) => {
+      if (!l) {
+        return null;
+      }
+      let found = false;
+      for (const link of links) {
+        if (link === l) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        for (const link of newLinks) {
+          if (link === l) {
+            found = true;
+            break;
+          }
+        }
+      }
+      if (found) {
+        return l;
+      } else {
+        return null;
+      }
+    }
+    setClickLink((link) => {
+      return filterNotFound(link);
+    });
+    setFocusLink((link) => {
+      return filterNotFound(link);
+    });
+  }, [links, newLinks]);
+
+  useEffect(() => {
     if (scaleToFit) {
       if (nodes.length > 0) {
         let minX = nodes[0].x,

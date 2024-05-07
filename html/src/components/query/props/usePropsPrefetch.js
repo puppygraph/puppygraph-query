@@ -26,6 +26,7 @@ const usePropsPrefetch = (
             .filter((id) => !propsDataMap.has(id));
           const missingLinkIds = links
             .map((link) => link.id)
+            .filter((id) => !id.startsWith("_path_"))
             .filter((id) => !propsDataMap.has(id));
 
           const total = nodes.length + links.length;

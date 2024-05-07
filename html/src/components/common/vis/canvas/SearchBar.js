@@ -133,7 +133,7 @@ const SearchBar = ({ loading, itemMap, onSearch }) => {
           {suggestions.map((suggestion, index) => (
             <li
               role="button"
-              tabindex={0}
+              tabIndex={0}
               className={
                 "cursor-pointer text-sm px-4 py-1 hover:bg-slate-50" +
                 (index === selectedSuggestionIndex ? " bg-slate-100" : "")

@@ -7,12 +7,14 @@ import {
 } from "react";
 import ResponseView from "../responseview/ResponseView";
 import { GremlinContext } from "../../common/connection/Gremlin";
+import { StatusContext, GRAPH_MODE_BIGGRAPH } from "../../../StatusContext";
 
 export const QueryContext = createContext();
 
 const LOCAL_STORAGE_KEY = "puppyQueries";
 
 export const QueryProvider = ({ children }) => {
+  const { status } = useContext(StatusContext);
   const { submit } = useContext(GremlinContext);
   const [queries, setQueries] = useState(() => {
     const puppyQueries = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -24,7 +26,11 @@ export const QueryProvider = ({ children }) => {
     ) {
       return puppyQueries;
     }
-    return [{ q: "g.V().limit(10).\n  outE().inV().path()\n", s: " ", r: "" }];
+    if (!!status && status?.WebUI?.GraphMode !== GRAPH_MODE_BIGGRAPH) {
+      return [{ q: "g.V().limit(10).\n  outE().inV().path()\n", s: " ", r: "" }];
+    } else {
+      return [{ q: "g.E().limit(10)\n", s: " ", r: "" }];
+    }
   });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [onResponse, setOnResponse] = useState(() => () => {});

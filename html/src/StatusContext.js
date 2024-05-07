@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useContext, useCallback } fr
 import { AuthContext } from "./AuthContext";
 
 export const StatusContext = createContext();
+export const GRAPH_MODE_BIGGRAPH = "big_graph";
 
 export const StatusProvider = ({ children }) => {
   const { loggedIn, fetchWithAuth, refreshToken } = useContext(AuthContext);
