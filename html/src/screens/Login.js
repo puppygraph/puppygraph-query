@@ -48,15 +48,6 @@ function Login() {
 
                 <div>
                   <TextField type="password" id="password" name="password" autoComplete="current-password" label="Password" variant="outlined" className="w-full" required {...register("password")} />
-                  <div className="text-sm text-right">
-                    <Link
-                      to="https://docs.puppygraph.com/user-manual/getting-started#set-username-and-password"
-                      target="_blank"
-                      className="font-semibold text-gray-600 hover:text-gray-500"
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
                   {errorMessage && (
                     <div className="mt-2 sm:flex sm:items-center">
                       <div className="text-red-500">{errorMessage}</div>
