@@ -21,7 +21,7 @@ RUN <<EOF
 CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} make -B build/server
 EOF
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
@@ -35,15 +35,6 @@ RUN apt-get update && \
       dos2unix \
       file \
       krb5-user
-
-# Python 3.10 for ubuntu 20.04
-RUN <<EOF
-apt update && apt install software-properties-common -y && add-apt-repository ppa:deadsnakes/ppa
-apt install python3.10 python3.10-distutils -y
-rm /usr/bin/python3 && ln -s /usr/bin/python3.10 /usr/bin/python3
-curl -sS https://bootstrap.pypa.io/get-pip.py | python3
-python3 -m pip install gremlinpython
-EOF
 
 RUN mkdir -p /opt/puppygraph/bin
 RUN mkdir -p /opt/puppygraph/html/build
